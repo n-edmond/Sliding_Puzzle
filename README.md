@@ -18,5 +18,5 @@ A* search is used to find the solution and the heuristic function h(x), uses  th
 For each puzzle, the program will show the moves required to solve the puzzle. If no solution is possible, the program will state that. Note: The longest possible shortest path for a solvable 8-puzzle has length 31. 
  
 Wiki Link:
-Program 1:
+Program 1: https://github.com/n-edmond/Sliding_Puzzle/wiki/Solving-an-8_Puzzle-using-A*-in-C--
 

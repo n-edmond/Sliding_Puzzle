@@ -4,9 +4,11 @@ This programming assignment uses guided search to solve a game problem.
 # THE PROBLEM:
 Consider the 8-puzzle: 8 tiles each numbered 1-8 on a 3x3 grid, with one space empty. Any adjacent tile can be moved into the empty square (in effect swapping the locations of that tile and the empty square). This can be done by moving an adjacent tile vertically or horizontally (not diagonally). Thus the number of possible moves is at least 2  (if the empty square is in a corner) and at most 4 (if it’s in the center). 
 The goal is to begin with some arbitrary arrangement and end with the tiles in the followingarrangement:
+
 1  2  3
 4  5  6
 7  8  E
+
 where ‘E’ denotes the empty square. One  complication is that permutations of the game board fall into 2 disjoint sets of odd or even parity, only one of which can reach the goal. Thus, half of all possible tile arrangements cannot lead to a solution. (These states aren’t reachable by a physical puzzle.) 
 
 This program detects whether a solution is possible or not using inversion.  

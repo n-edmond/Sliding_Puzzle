@@ -21,6 +21,6 @@ This program uses an input file where the first element, on a line by itself, is
 
  
 # WIKI LINK:
-To see program useage and screenshots, pelase check out the [wiki page!](https://github.com/n-edmond/Sliding_Puzzle/wiki/Solving-an-8_Puzzle-using-A*)
+To see program useage and screenshots, pelase check out the [wiki page!](https://github.com/n-edmond/Sliding_Puzzle/wiki)
 
 

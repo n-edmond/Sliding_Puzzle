@@ -41,7 +41,6 @@ size_t hashing(vector<vector<int>> puzzles)
 		for (size_t j = 0; j < puzzles[i].size(); ++j) {
 			string tmp = to_string(puzzles[i][j]);//converting to string
 			result += tmp;//concatinating to result
-			cout << result;
 		}
 	}
 	return hash<string>{}(result);

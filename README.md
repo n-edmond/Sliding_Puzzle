@@ -1,4 +1,4 @@
-# Sliding_Puzzle
+# SLIDING PUZZLE
 This programming assignment uses guided search to solve a game problem. A* search is used to find the solution and the heuristic function h(x), uses  the sum of the Manhattan (city-block) distances for each tile from where it needs to be.  
 
 For each puzzle, the program will show the moves required to solve the puzzle. If no solution is possible, the program will state that. Note: The longest possible shortest path for a solvable 8-puzzle has length 31. 
@@ -20,6 +20,6 @@ This program detects whether a solution is possible or not using inversion.
 This program uses an input file where the first element, on a line by itself, is the number of puzzles contained in the file.  After that will be the specified number of puzzles in the above format (3 lines of 3 characters each, each character will be a digit 1-8 or an upper case ‘E’). Each puzzle is separated from the next by a blank line.
 
  
-Wiki Link:
+#WIKI LINK:
 Program 1: https://github.com/n-edmond/Sliding_Puzzle/wiki/Solving-an-8_Puzzle-using-A*-in-C--
 

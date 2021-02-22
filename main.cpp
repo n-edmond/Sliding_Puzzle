@@ -6,27 +6,32 @@
 #include <unordered_map>
 #include "Board.h"
 
+//int moves_used = 0;
+
 using namespace std;
 
 struct Comparator
 { //used to help determine which path to select, returns bool value
 	bool operator()(Board* left, Board* right)
-	{
+	{//checks if the left side of the board is greater than the right
 		return left->get_f() > right->get_f();
 	}
 };
 void read_files(string filename);//reads the files and completes program
-size_t hashing(vector<vector<int>> puzzles);
+size_t hashing(vector<vector<int>> puzzles); //used to get hash values of the puzzle. size t used to help with byte size
 int get_inversion_count(vector<vector<int>> puzzle); //gets inversion
-bool is_solvable_check(const Board& board); //checks if a puzzle is solveable
+bool is_solvable_check(const Board& board); //checks if solveable
 void solve(Board* start, const Board* final); //will begin solving if yes
 
 
 int main() {
-	string file = "input.txt";
+	string file = "input.txt";//change input text name here
 	read_files(file);
 
 	//USED FOR TESTING
+
+	//vector<vector<int>> matrix {{4,2,E},{5,1,6}, {7,3,8}}; //solveable
+	//vector<vector<<int> unsolveable_matrix {{2,1,8},{4,3,5}, {E,6,7}};
 	  //e_puzzle = new Board(matrix);
 	  //solve(e_puzzle, win_condition);
 	  //delete e_puzzle;//deleting pointer
@@ -48,12 +53,12 @@ size_t hashing(vector<vector<int>> puzzles)
 
 int getInvCount(vector<vector<int>> puzzle)
 {//idea retrieved from geeksForGeeks
-//checks if values are in revers order of goal state
-	vector<int> tmp(9);//creates temp vector
+//checks if values are in reverse order of goal state
+	vector<int> tmp(9);//creates temp vector of size 9 (3x3 matrix)
 	for (size_t i = 0; i < puzzle.size(); ++i)
 	{
 		for (size_t j = 0; j < puzzle[i].size(); ++j)
-		{
+		{//size of vector inside the vector 
 			tmp[i * puzzle[i].size() + j] = puzzle[i][j];
 		}
 	}
@@ -93,30 +98,33 @@ void solve(Board* start, const Board* final)
 
 	start->manhat(*final);//calculates heuristics using manhattan distance
 	start->calc_f();//calcualtes f to determine start point
-	board_store.push(start);
+	board_store.push(start);//adds to the priority queue
 
 	while (!board_store.empty())
 	{//while the vector holding all the boards isnt empty
-		Board* min = board_store.top();
-		board_store.pop();
-		size_t key = hashing(min->getPuzzles());
-		visited[key] = min->getPuzzles();
+		Board* min = board_store.top();//takes largest elementn of priority queue
+		board_store.pop();//removes
+		size_t key = hashing(min->getPuzzles());//gets hash value
+		visited[key] = min->getPuzzles();//adds to visted map
 
 		if (*min == *final)
-		{
+		{//shows the moves
 			min->display_movesets();
+			//moves_used++;
 			return;
 		}
 		for (size_t i = 0; i < 4; ++i)
 		{
+			//saves loc of space aps pairs
 			pair<int, int> coord = min->get_loc_of_space();
-			if (min->canGenerate(coord.first, coord.second, i))
-			{
+
+			if (min->can_move(coord.first, coord.second, i))
+			{//calcuates f pieces can be moved depending on where it can be moved
 				Board* tmp = min->create_child_node(coord.first, coord.second, i);
 				tmp->set_parent_node(min);
-				tmp->manhat(*final);
-				tmp->calc_g(*min);
-				tmp->calc_f();
+				tmp->manhat(*final);//calc manhat
+				tmp->calc_g(*min);//calculate g
+				tmp->calc_f();//calculate f
 				size_t tmpKey = hashing(tmp->getPuzzles());
 				if (visited.find(tmpKey) == visited.end())
 				{
@@ -132,7 +140,7 @@ void read_files(string filename)
 {
 	vector<vector<int>> goal = { {1,2,3}, {4,5,6}, {7,8,0} };//goal state
 	vector<vector<int>> data;//holds the data from the file
-	Board* win_condition = new Board(goal);//setting the win gate for class use
+	Board* win_condition = new Board(goal);//set win board for class use
 	Board* e_puzzle;//eight puzzle pointer
 	int counter = 1;//counter to go through all puzzle solutions
 	int num_of_puzzles;//saves how many puzzles to solve in a file
@@ -162,24 +170,24 @@ void read_files(string filename)
 					}
 					else
 					{//change tempstring to int value if E is not encountered
-						int myint1 = stoi(tmpString);
+						int true_val = stoi(tmpString);//returns val of 
 						//cout<<tmpString<< endl;
-						tmpVec.push_back(myint1);
+						tmpVec.push_back(true_val);
 					}
 				}
-				data.push_back(tmpVec);
+				data.push_back(tmpVec);//adds vector to data vector
 			}
-			e_puzzle = new Board(data);
-			solve(e_puzzle, win_condition);
-			delete e_puzzle;//deleting pointer
-			delete win_condition;//deleting pointer
+			//with the new vector populated, begin trying to see if solveable
+			e_puzzle = new Board(data);//sets the data to be the eight puzzle
+			solve(e_puzzle, win_condition);//try to solve
+			delete e_puzzle;//deleting pointer for new population
+			delete win_condition;//deleting pointer for new population
 
-			counter++;//increment counter to swap to next puzzle 
-			//PRINTS THE ARRAY. USED FOR TESTING
-			data.clear();//erase the vector
+			counter++;//increment counter to swap to next puzzle in first while lp
+			data.clear();//erase the vector for new population
 			//continue;
 		}
 	}
-	file.close();
+	file.close();//closes the file
 
 }

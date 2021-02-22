@@ -2,7 +2,7 @@
 
 
 Board::Board(vector<vector<int>> puzzles)
-{//parameterized constructor. initilizing
+{
 	this->puzzles = puzzles;
 	this->parent = nullptr;
 }
@@ -41,7 +41,7 @@ Board* Board::create_child_node(int x, int y, int pos)
 		break;
 	}
 	default:
-	{
+	{//if case 3 should just move here. There should be no other possible cases
 		Board* newBoard = new Board(*this);
 		newBoard->swap_pos(x, y, x + 1, y);
 		return newBoard;
@@ -66,17 +66,17 @@ pair<int, int> Board::get_loc_of_space() const
 	return loc;//retruns coord of blank spot
 }
 
-bool Board::canGenerate(int x, int y, int pos)
+bool Board::can_move(int x, int y, int pos)
 {//checks if current position can move into given loc or not
-	bool flag = false;
+	bool move_check = false;
 	switch (pos)
 	{
-	case 0: flag = y - 1 >= 0; break;
-	case 1: flag = x - 1 >= 0; break;
-	case 2: flag = y + 1 <= 2; break;
-	case 3: flag = x + 1 <= 2; break;
+	case 0: move_check = y - 1 >= 0; break;
+	case 1: move_check = x - 1 >= 0; break;
+	case 2: move_check = y + 1 <= 2; break;
+	case 3: move_check = x + 1 <= 2; break;
 	}
-	return flag;//returns a bool 
+	return move_check;//returns a bool 
 }
 
 void Board::swap_pos(int x, int y, int newX, int newY)

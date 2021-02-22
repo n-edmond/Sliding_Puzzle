@@ -20,6 +20,6 @@ This program detects whether a solution is possible or not using inversion.
 This program uses an input file where the first element, on a line by itself, is the number of puzzles contained in the file.  After that will be the specified number of puzzles in the above format (3 lines of 3 characters each, each character will be a digit 1-8 or an upper case ‘E’). Each puzzle is separated from the next by a blank line.
 
  
-#WIKI LINK:
+# WIKI LINK:
 Program 1: https://github.com/n-edmond/Sliding_Puzzle/wiki/Solving-an-8_Puzzle-using-A*-in-C--
 
